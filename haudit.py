@@ -2,7 +2,7 @@ import sys,argparse,urllib2
 
 print('haudit (https://github.com/degan/haudit)')
 
-parser = argparse.ArgumentParser(description='HTTP Header Auditing.')
+parser = argparse.ArgumentParser(description='HTTP Header Audit')
 parser.add_argument('url', help='URL to check')
 args = parser.parse_args()
 
