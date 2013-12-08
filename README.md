@@ -6,7 +6,7 @@ Use to quickly audit important HTTP Security Headers.
 
 ## Usage
     
-    python haudity.py http://example.com
+    python haudit.py http://example.com
 
 ## TODO
 
