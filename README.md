@@ -1,5 +1,7 @@
 # haudit - HTTP Header Audit
 
+Python 2.7
+
 ## Description
 
 Use to quickly audit important HTTP Security Headers. 
@@ -10,7 +12,7 @@ Use to quickly audit important HTTP Security Headers.
 
 ## TODO
 
-This is a work in progress. Validating existing headers needs to be more intelligent.
+1. This is a work in progress. Validating existing headers needs to be more intelligent.
 
 ## Contributing
 
