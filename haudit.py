@@ -1,4 +1,4 @@
-import sys,argparse,urllib2 
+import sys,argparse,urllib 
 
 print("haudit (https://github.com/degan/haudit)")
 
@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser(description='HTTP Header Audit')
 parser.add_argument('url', help='URL to check')
 args = parser.parse_args()
 
-http_audit = {'X-XSS-Protection' : 'Enables the Cross-site scripting filter built into browsers.','X-Frame-Options' : 'Enables Clickjacking prevention.','Strict-Transport-Security' : 'HSTS Enforces secure SSL connections. Only enable if entire domain is SSL. Subdomains can be included as well.','X-Content-Type-Options' : 'Prevents MIME-sniffing.','Content-Security-Policy' : 'Attack Prevention.'}
+http_audit = {'X-XSS-Protection' : 'Enables the Cross-site scripting filter built into browsers.','X-Frame-Options' : 'Enables Clickjacking prevention.','Strict-Transport-Security' : 'HSTS Enforces secure SSL connections. Only enable if entire domain is SSL. Subdomains can be included as well.','X-Content-Type-Options' : 'Prevents MIME-sniffing.','Content-Security-Policy' : 'Attack Prevention.', 'X-Download-Options' : 'Prevent downloads from opening automatically, etc', 'Access-Control-Allow-Origin' : 'Restrict data and content from your site'}
 #TODO: https specific checks
 https_audit = {'Set-Cookie' : 'cookie should be secure and httponly over SSL.', 'Cache-Control' : ''}
 
@@ -17,7 +17,7 @@ try:
         https = False;
 
     print ("")
-    headers = urllib2.urlopen(args.url).headers.headers
+    headers = urllib.urlopen(args.url).headers.headers
     headers_split = {}
     headers_split_upper = {}
     for header in headers:
@@ -31,7 +31,7 @@ try:
         if item.upper() in headers_split_upper:
             item_num = item_num + 1
             item_value = headers_split_upper[item.upper()].strip() 
-            print str(item_num) + ". " + item.upper() + ": " + item_value  
+            print (str(item_num) + ". " + item.upper() + ": " + item_value)  
             item = item.upper()
             item_value = item_value.upper()
 
@@ -69,11 +69,11 @@ try:
             item_num = item_num + 1
             print (str(item_num) + ". " + item + " (" + http_audit[item] + ")\n")
 
-except urllib2.HTTPError, e:
+except urllib.HTTPError as e:
     print ("HTTP Error: " + str(e.code) + " - " + str(e.reason))
 
-except urllib2.URLError, e:
+except urllib.URLError as e:
     print ("URL Error: " +  str(e.reason))
 
-except ValueError, e:
+except ValueError as e:
     print ("URL Error: " + str(e))
