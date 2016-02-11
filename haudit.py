@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser(description='HTTP Header Audit')
 parser.add_argument('url', help='URL to check')
 args = parser.parse_args()
 
-http_audit = {'X-XSS-Protection' : 'Enables the Cross-site scripting filter built into browsers.','X-Frame-Options' : 'Enables Clickjacking prevention.','Strict-Transport-Security' : 'HSTS Enforces secure SSL connections. Only enable if entire domain is SSL. Subdomains can be included as well.','X-Content-Type-Options' : 'Prevents MIME-sniffing.','Content-Security-Policy' : 'Attack Prevention.', 'X-Download-Options' : 'Prevent downloads from opening automatically, etc', 'Access-Control-Allow-Origin' : 'Restrict data and content from your site'}
+http_audit = {'X-XSS-Protection' : 'Enables the Cross-site scripting filter built into browsers.','X-Frame-Options' : 'Enables Clickjacking prevention.','Strict-Transport-Security' : 'HSTS Enforces secure SSL connections. Only enable if entire domain is SSL. Subdomains can be included as well.','X-Content-Type-Options' : 'Prevents MIME-sniffing.','Content-Security-Policy' : 'Attack Prevention.', 'X-Download-Options' : 'Prevent downloads from opening automatically, etc', 'Access-Control-Allow-Origin' : 'Restrict data and content from your site', 'Public-Key-Pins' : 'HPKP'}
 #TODO: https specific checks
 https_audit = {'Set-Cookie' : 'cookie should be secure and httponly over SSL.', 'Cache-Control' : ''}
 
@@ -31,7 +31,7 @@ try:
         if item.upper() in headers_split_upper:
             item_num = item_num + 1
             item_value = headers_split_upper[item.upper()].strip() 
-            print (str(item_num) + ". " + item.upper() + ": " + item_value)  
+            print (str(item_num) + ". " + item + ": " + item_value)  
             item = item.upper()
             item_value = item_value.upper()
 
@@ -62,7 +62,7 @@ try:
                 #TODO
                 print ("Valid!\n")
 
-    print ("Missing Headers")
+    print ("\nMissing Headers")
     item_num = 0 
     for item in http_audit:
         if item.upper() not in map(str.upper, headers_split):
